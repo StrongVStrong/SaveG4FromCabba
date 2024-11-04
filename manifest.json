@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "Please Cabba I need This",
+    "version": "1.0.0",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["Content.js"]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "Imgs/bubble.jpeg",
+                "Imgs/Cabb.jpg",
+                "Imgs/saveme.jpg",
+                "Imgs/target.png",
+                "SFX/4geta.mp3",
+                "SFX/fnaf.mp3",
+                "SFX/needthis.mp3"
+            ],
+            "matches": ["<all_urls>"]
+        }
+    ]
+}
