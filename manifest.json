@@ -2,6 +2,12 @@
     "manifest_version": 3,
     "name": "Please Cabba I need This",
     "version": "1.0.0",
+    "description": "AAAAH",
+    "icons": {
+        "16": "Imgs/16.png",
+        "48": "Imgs/48.png",
+        "128": "Imgs/128.png"
+    },
     "permissions": [
         "storage",
         "activeTab",
@@ -19,7 +25,7 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "Imgs/bubble.jpeg",
+                "Imgs/bubble.png",
                 "Imgs/Cabb.jpg",
                 "Imgs/saveme.jpg",
                 "Imgs/target.png",

@@ -1,6 +1,6 @@
 const qteTime = 5000;
 
-const bubl = chrome.runtime.getURL("Imgs/bubble.jpeg");
+const bubl = chrome.runtime.getURL("Imgs/bubble.png");
 const cabba = chrome.runtime.getURL("Imgs/Cabb.jpg");
 const gogeta = chrome.runtime.getURL("Imgs/saveme.jpg");
 const targetImg = chrome.runtime.getURL("Imgs/target.png");
@@ -35,7 +35,7 @@ function randomInterval() {
     const randInt = Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
     console.log('Next qte...');
     qteTimeout = setTimeout(() => {
-        if (document.visibilityState === "visible" || qteActive) {
+        if (document.visibilityState === "visible") {
             if (sessionStorage.getItem("helpGogeta") === "yes") {
                 console.log('Cabba arrives');
                 qte();
