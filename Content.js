@@ -15,14 +15,44 @@ let startTime;
 const startLeft = 90;
 const endLeft = 45;
 
-if (sessionStorage.getItem("helpGogeta") === "yes") {
-    console.log('Cabba arrives');
-    randomInterval();
+function activeWin() {
+    if (document.visibilityState === "visible" && !qteTimeout) {
+        randomInterval();
+    }
 }
-else if (sessionStorage.getItem("helpGogeta") !== "no") {
-    console.log('Cabba solo');
-    setTimeout(showIntroOverlay, 50);
+
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && !qteTimeout) {
+
+            activeWin();
+        
+    }
+});
+
+function randomInterval() {
+    const minInt = 1*1000;
+    const maxInt = 5*1000;
+    const randInt = Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
+    console.log('Next qte...');
+    qteTimeout = setTimeout(() => {
+        if (document.visibilityState === "visible" || qteActive) {
+            if (sessionStorage.getItem("helpGogeta") === "yes") {
+                console.log('Cabba arrives');
+                qte();
+            }
+            else if (sessionStorage.getItem("helpGogeta") !== "no") {
+                console.log('Cabba solo');
+                setTimeout(showIntroOverlay, 50);
+            }
+    }   else {
+        clearTimeout(qteTimeout);
+        qteTimeout = null;
+        }
+    }, randInt);
 }
+
+
+activeWin();
 
 function showIntroOverlay() {
     const overlay = document.createElement('div');
@@ -178,12 +208,33 @@ function qte() {
             needthis.pause();
             needthis.currentTime = 0;
             fnaf.play();
-            alert("THANKS FOR SAVING ME BACK THERE");
-            fnaf.pause();
-            fnaf.currentTime = 0;
+
+            //Overlay time
+            const winOverlay = document.createElement("div");
+            winOverlay.style.position = "fixed";
+            winOverlay.style.top = "0";
+            winOverlay.style.left = "0";
+            winOverlay.style.width = "100%";
+            winOverlay.style.height = "100%";
+            winOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+            winOverlay.style.zIndex = "9999";
+            winOverlay.style.color = "white";
+            winOverlay.style.fontSize = "24px";
+            winOverlay.style.display = "flex";
+            winOverlay.style.justifyContent = "center";
+            winOverlay.style.alignItems = "center";
+            winOverlay.style.cursor = "pointer";
+            winOverlay.textContent = "THANKS FOR SAVING ME BACK THERE... You can carry on now";
+
+            winOverlay.addEventListener("click", () => {
+                fnaf.pause();
+                fnaf.currentTime = 0;
+                winOverlay.remove();
+                randomInterval();
+            });
+            document.body.appendChild(winOverlay);
             clearTimeout(qteTimeout);
             overlay.remove();
-            randomInterval();
         });
 
         overlay.appendChild(target);
@@ -198,7 +249,7 @@ function qte() {
             overlay.innerHTML = "";
             overlay.style.backgroundColor = "rgba(0,0,0,0.7)";
             const failureMessage = document.createElement("div");
-            failureMessage.textContent = "NO CABBA PLEASE SPARE ME";
+            failureMessage.textContent = "NO CABBA PLEASE SPARE ME - Super Saiyan 4 Gogeta";
             failureMessage.style.position = "fixed";
             failureMessage.style.top = "50%";
             failureMessage.style.left = "50%";
@@ -218,11 +269,4 @@ function qte() {
 
     target();
     }
-    function randomInterval() {
-        const minInt = 1*60*1000;
-        const maxInt = 5*60*1000;
-        const randInt = Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
-        console.log('Cabba leaves for now');
 
-        setTimeout(qte, randInt);
-}
