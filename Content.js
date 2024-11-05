@@ -242,14 +242,12 @@ function qte() {
         //Failure
         qteTimeout = setTimeout(() => {
             target.remove();
-            getta4.pause();
-            needthis.pause();
-            needthis.currentTime = 0;
-            getta4.currentTime = 0;
+            getta4.playbackRate = 0.5;
+            
             overlay.innerHTML = "";
             overlay.style.backgroundColor = "rgba(0,0,0,0.7)";
             const failureMessage = document.createElement("div");
-            failureMessage.textContent = "NO CABBA PLEASE SPARE ME - Super Saiyan 4 Gogeta";
+            failureMessage.textContent = "NO CABBA PLEASE SPARE ME - Super Saiyan 4 Gogeta...RIP";
             failureMessage.style.position = "fixed";
             failureMessage.style.top = "50%";
             failureMessage.style.left = "50%";
@@ -260,6 +258,10 @@ function qte() {
 
             //Response
             overlay.addEventListener("click", () => {
+                getta4.pause();
+                needthis.pause();
+                needthis.currentTime = 0;
+                getta4.currentTime = 0;
                 overlay.remove();
                 randomInterval();
             });
