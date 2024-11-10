@@ -30,8 +30,8 @@ document.addEventListener("visibilitychange", () => {
 });
 
 function randomInterval() {
-    const minInt = 1*1000;
-    const maxInt = 5*1000;
+    const minInt = 1*60*1000;
+    const maxInt = 5*60*1000;
     const randInt = Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
     console.log('Next qte...');
     qteTimeout = setTimeout(() => {
